@@ -27,6 +27,17 @@ app.get("/api/chat", async (req, res) => {
   }
 });
 
+// READ de chat
+app.get("/api/chat/:id", async (req, res) => {
+  try {
+    const result = await connection`SELECT * FROM chat WHERE id_usuario = ${id}`;
+    res.json(result);
+  } catch (e) {
+    console.error("Error en la consulta:", e);
+    res.status(500).json({ error: "Error en la base de datos " });
+  }
+});
+
 // READ de chat 
 app.get("/api/usuarios", async (req, res) => {
   try {
